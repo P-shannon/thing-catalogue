@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
 		if user
 			sign_in(user)
 			flash[:notice] = "Hi, #{username}! You signed in!"
-			redirect_to #somewhere...
+			redirect_to things_route
 		else
 			flash[:error] = 'Username or password incorrect'
 			@user = User.new(username: username)
@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
 	def destroy
 		sign_out
 		flash[:notice] = 'You signed out!'
-		redirect_to #somewhere else...
+		redirect_to new_session_route
 	end
 
 	

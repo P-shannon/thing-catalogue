@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 	def sign_in(user)
-		token = SecrueRandom.url_base64
+		token = SecureRandom.urlsafe_base64
 		session[:session_token] = token
 		user.update_attribute(:session_token, token)
 	end
@@ -29,12 +29,12 @@ class ApplicationController < ActionController::Base
 	def ensure_signed_in
 		return if current_user
 		flash[:error] = 'You must be signed in to see this.'
-		redirect_to #somewhere...
+		redirect_to new_session_route
 	end
 
 	def ensure_signed_out
 		return unless current_user
 		flash[:error] = 'You are signed in, so you shouldn\' be here...'
-		redirect_to #somewhere else...
+		redirect_to things_route
 	end
 end
